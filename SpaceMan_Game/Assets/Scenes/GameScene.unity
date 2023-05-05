@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a8502c0ff2b2d469f2ccaffac22129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 6
+  jumpForce: 15
   groundMask:
     serializedVersion: 2
     m_Bits: 256
@@ -302,11 +302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1580335916545380932, guid: ca582f5674be28c4b95e9940650f8e5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.81
+      value: -7.93
       objectReference: {fileID: 0}
     - target: {fileID: 1580335916545380932, guid: ca582f5674be28c4b95e9940650f8e5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.28
+      value: -1.97
       objectReference: {fileID: 0}
     - target: {fileID: 1580335916545380932, guid: ca582f5674be28c4b95e9940650f8e5c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -347,6 +347,14 @@ PrefabInstance:
     - target: {fileID: 1580335916545380935, guid: ca582f5674be28c4b95e9940650f8e5c, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1580335916545380954, guid: ca582f5674be28c4b95e9940650f8e5c, type: 3}
+      propertyPath: m_Mass
+      value: 1.8978801
+      objectReference: {fileID: 0}
+    - target: {fileID: 1580335916545380954, guid: ca582f5674be28c4b95e9940650f8e5c, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca582f5674be28c4b95e9940650f8e5c, type: 3}
