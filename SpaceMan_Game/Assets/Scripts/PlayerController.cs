@@ -4,33 +4,48 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //Variables del movimiento del personaje
-    public float jumpForce = 6f; //float
-    private Rigidbody2D rb; //no colocar nada hace que la variable sea private
-
+    public float jumpForce = 6f;
+    private Rigidbody2D rb; 
+    public LayerMask groundMask;
     
     void Awake()
     {
         rb = GetComponent <Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() //Reconoce acciones por cada fotograma
     {
-        if(Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Jump();
         }
     }
 
-    void Jump()
+    void Jump() //Hace la accion de saltar
     {
-        rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+        if (IsTouchingTheGround())
+        {
+            rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    
+    bool IsTouchingTheGround() //Indica si el personaje esta o no tocando el suelo
+    {
+        if (Physics2D.Raycast(this.transform.position, Vector2.down, 1.5f, groundMask))
+        {
+            //TODO: programar logica de contacto
+            return true;
+        }
+        else 
+        {
+            //TODO: programar logica de no contacto
+            return false;
+        }
     }
 }
