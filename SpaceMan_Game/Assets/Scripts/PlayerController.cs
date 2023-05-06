@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     /* -- variables -- */
 
     //public
+    public float moveSpeed = 5f;
     public float jumpForce = 8f;
     public LayerMask groundMask;
     //private
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool isAlive = true;
     private bool isOnTheGround = true;
+    private bool isMoving = false;
 
 
     /* -- core methods -- */
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isAlive", isAlive);
         animator.SetBool("isOnTheGround", isOnTheGround);
+        animator.SetBool("isMoving", isMoving);
     }
 
     void Awake()
@@ -35,9 +38,13 @@ public class PlayerController : MonoBehaviour
         HandleJump();
         HandleOnTheGround();
         HandleVelocityY();
-        DrawDebugRay();
+        //DrawDebugRay();
     }
 
+    private void FixedUpdate()
+    {
+        HandleMovement();
+    }
 
     /* -- custom methods -- */
 
@@ -46,9 +53,26 @@ public class PlayerController : MonoBehaviour
         return Physics2D.Raycast(transform.position, Vector2.down, 1.5f, groundMask);
     }
 
+    void HandleMovement()
+    {
+        float moveInput = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+
+        if (moveInput != 0)
+        {
+            transform.localScale = new Vector3(moveInput, 1, 1);
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+        animator.SetBool("isMoving", isMoving);
+    }
+
     void HandleJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
         {
             if (IsTouchingTheGround())
             {
